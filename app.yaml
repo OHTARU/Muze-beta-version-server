@@ -1,0 +1,10 @@
+runtime: python310
+env: standard
+
+entrypoint: gunicorn -b :$PORT config.wsgi
+
+handlers:
+  - url: /static
+    static_dir: static/
+  - url: /.*
+    script: auto
