@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
-    path("user/", views.UserListView.as_view()),  # 유저 리스트 읽기
+    path("", views.UserListView.as_view()),  # 유저 리스트 읽기
     path("kakaologin/", views.KakaoSignCallbackView.as_view()),  # 카카오 로그인 주소
     path(
         "userchange/",

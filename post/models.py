@@ -7,10 +7,12 @@ from config import settings
 
 
 class PerformancePost(models.Model):
+    id = models.AutoField(primary_key=True)
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="Post_author"
-    )  # id값 들어감
-
+    )  # 작성자
+    gender = models.CharField(max_length=50, default="무관")  # 성별
     agency = models.CharField(max_length=50, null=False, default="기관명")  # 주최기관
     title = models.CharField(max_length=200)  # 포스트 제목
     call = models.CharField(max_length=50)  # 연락수단

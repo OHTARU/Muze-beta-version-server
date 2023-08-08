@@ -65,7 +65,7 @@ class UserModel(AbstractBaseUser):
     REQUIRED_FIELDS = ["name"]  # 필수로 작성 필드
 
     def __str__(self):
-        return f"{self.id}({self.name})"
+        return f"{self.name}"
 
     def has_perm(self, perm, obj=None):  # 권한 확인
         return self.is_admin

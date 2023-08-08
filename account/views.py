@@ -21,8 +21,9 @@ class UserListView(APIView):
 
     @method_decorator(csrf_exempt, name="dispatch")
     def get(self, request):
-        queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
+        id = request.GET.get("id", None)
+        queryset = User.objects.get(id=id)
+        serializer = UserSerializer(queryset)
         return JsonResponse(serializer.data, safe=False)
 
     @method_decorator(csrf_exempt, name="dispatch")
@@ -118,8 +119,9 @@ class KakaoSignCallbackView(APIView):
             # 기존 디비에 있는 사용자 정보를 찾습니다.
             user_info = UserModel.objects.get(id=kakao_response["id"])
             # 기존 사용자는 응답에 ID와 "exist": True를 포함합니다.
+            serializer = UserSerializer(user_info)
             login(request, user_info)  # 로그인 세션 생성
-            return JsonResponse({"id": user_info.id, "exist": True})
+            return JsonResponse(serializer.data)
 
         except UserModel.DoesNotExist:
             # 사용자 정보를 찾을 수 없는 경우 새 사용자를 생성합니다.
