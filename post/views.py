@@ -4,11 +4,11 @@ from .serializers import PostSerializer
 from rest_framework import status
 from django.http import JsonResponse
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 
 class PostList(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     def get(self, request):
         queryset = PerformancePost.objects.all()
