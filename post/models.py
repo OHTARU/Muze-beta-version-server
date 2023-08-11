@@ -8,7 +8,6 @@ from config import settings
 
 class PerformancePost(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default = "이름")
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="Post_author"
     )  # 작성자
