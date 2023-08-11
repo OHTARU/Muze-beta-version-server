@@ -20,14 +20,14 @@ class PerformancePost(models.Model):
         max_length=50,
         null=True,
         default="0",
-    )  #
+    ) 
     info = models.TextField()  # 공연정보
     type = models.CharField(max_length=50)  # 공연종류
     deadline = models.CharField(max_length=50)  # 모집기한
     date = models.CharField(max_length=50)  # 공연일시
     location = models.CharField(max_length=300)  # 공연장소
     profile = models.ImageField(
-        upload_to="../static/media/Post", null=True, blank=True
+        upload_to="Post/", null=True, blank=True
     )  # 포스터사진
 
     Created = models.DateTimeField(default=datetime.now)

@@ -28,9 +28,9 @@ class UserListView(APIView):
 
     @method_decorator(csrf_exempt, name="dispatch")
     def post(self, request):
-        profile = request.FILES.get("media/profile")
+        user_image = request.FILES.get("profile")
         data = request.data.copy()
-        data["media/profile"] = profile
+        data["profile"] = user_image
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -48,11 +48,11 @@ class UserListView(APIView):
                 {"error": "User not found"}, status=status.HTTP_404_NOT_FOUND
             )
 
-        if "image" in request.FILES:
+        if "profile" in request.FILES:
             # 이미지를 처리하는 추가 로직
-            image = request.FILES["media/profile"]
+            user_image = request.FILES["profile"]
             data = request.data.copy()
-            data["media/profile"] = image
+            data["profile"] = user_image
             serializer = UserSerializer(user, data=data, partial=True)
         else:
             serializer = UserSerializer(user, data=request.data, partial=True)
@@ -71,7 +71,7 @@ class UserListView(APIView):
                 {"error": "User not found"}, status=status.HTTP_404_NOT_FOUND
             )
 
-        user.delete()
+        user.delete() # 회원탈퇴기능
         return JsonResponse(
             {"message": "User successfully deleted"},
             safe=False,

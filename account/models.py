@@ -41,10 +41,10 @@ class UserModel(AbstractBaseUser):
         default="name",
     )
     profile = models.ImageField(
-        upload_to="media/profile", null=True, blank=True
+        upload_to="profile/", null=True, blank=True
     )  # 프로필 사진
 
-    POST = "PT"
+    POST = "PT" 
     CONSUMER = "CO"
     USE_APP = [
         (POST, "POST"),
