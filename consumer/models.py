@@ -7,7 +7,7 @@ from config import settings
 
 class Resume(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50,null=True,default="이름")
+    name = models.CharField(max_length=50, null=True, default="이름")
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="consum_user"
     )  # 작성자
